@@ -9,3 +9,4 @@ export * from './ui/TopMenu';
 export * from './ui/PageNotFound';
 export * from './ui/Title';
 export * from './ui/sidebar/Sidebar';
+export * from './ui/Footer';
