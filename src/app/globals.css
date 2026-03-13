@@ -1,8 +1,40 @@
 @import "tailwindcss";
 
+@theme {
+  --color-white: #F2EBE1;
+  --color-gray: #1A1A1A;
+  --color-black: #151415;
+  --color-dark: #000000;
+  
+  --color-secondary: #BACBC7;
+  --color-secondary-50: #F4F7F6;
+  --color-secondary-100: #E8EFED;
+  --color-secondary-200: #D5E2DE;
+  --color-secondary-300: #BACBC7;
+  --color-secondary-400: #9BB4AF;
+  --color-secondary-500: #BACBC7;
+  --color-secondary-600: #8CAEAA;
+  --color-secondary-700: #6B8E8A;
+  --color-secondary-800: #4D6B68;
+  --color-secondary-900: #334948;
+  --color-secondary-950: #1F2E2D;
+  
+  --color-primary: #FAC234;
+  --color-primary-50: #FEF9EC;
+  --color-primary-100: #FDF1CB;
+  --color-primary-200: #FBE099;
+  --color-primary-300: #F9CE5E;
+  --color-primary-400: #F7BC3A;
+  --color-primary-500: #FAC234;
+  --color-primary-600: #E8A81A;
+  --color-primary-700: #C07D0E;
+  --color-primary-800: #8A560A;
+  --color-primary-900: #5C3807;
+  --color-primary-950: #3A2204;
+}
+
 :root {
-  --primary: #274494;
-  --foreground-rgb: 0, 0, 0;
+  --foreground-rgb: 18, 18, 19;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
 }
@@ -10,8 +42,8 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --background-start-rgb: 18, 18, 19;
+    --background-end-rgb: 18, 18, 19;
   }
 }
 
@@ -45,11 +77,14 @@ body {
 }
 
 @layer components {
+  .btn-dark {
+    @apply  text-white bg-dark py-2 px-4 text-base text-left rounded border border-mist-800 hover:border-mist-600 transition-colors duration-500;
+  }
   .btn-primary {
-    @apply bg-black text-white py-2 px-4 rounded border border-mist-800 hover:border-mist-600 transition-border duration-500;
+    @apply bg-primary text-black py-2 text-base  px-4 rounded border border-dark hover:bg-primary-600 transition-colors duration-500;
   }
 
   .btn-secondary {
-    @apply bg-gray-200 hover:bg-gray-300 text-black py-2 px-4 rounded border border-mist-800 hover:border-mist-600 transition-border duration-500;
+    @apply bg-secondary-500 hover:bg-secondary-700 text-base  text-black py-2 px-4 rounded border border-mist-800 hover:border-mist-600 transition-colors duration-500;
   }
 }
