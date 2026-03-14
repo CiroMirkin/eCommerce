@@ -1,5 +1,6 @@
 
 export interface Product {
+    id: string;
     description: string;
     images: string[];
     inStock: number;
@@ -8,7 +9,7 @@ export interface Product {
     slug: string;
     tags: string[];
     title: string;
-    type: ProductTypes;
+    type?: ProductTypes;
 }
 
 export type Size = 'XS'|'S'|'M'|'L'|'XL'|'XXL'|'XXXL';
