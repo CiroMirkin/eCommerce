@@ -1,11 +1,12 @@
 "use server"
 
-import { Product } from "@/interfaces"
+import { productTypeToCategory, Product, ProductTypes, categoryToProductType } from "@/interfaces"
 import { prisma } from "@/lib/prisma"
 
 interface PaginationOptions {
     page?: number
     take?: number
+    category?: ProductTypes
 }
 
 interface Response {
@@ -17,6 +18,9 @@ interface Response {
 export const getPaginatedProductsWithImages = async (options: PaginationOptions): Promise<Response> => {
     try {
         let { page = 1, take = 16 } = options
+        const { category } = options
+        const categoryLabel = category && productTypeToCategory[category]
+        
         if(isNaN(Number(page)) || page < 1) page = 1
         if(isNaN(Number(take))) take = 16
         
@@ -33,9 +37,25 @@ export const getPaginatedProductsWithImages = async (options: PaginationOptions)
                             url: true,
                         },
                     },
+                    category: {
+                        select: {
+                            name: true,
+                        },
+                    },
                 },
+                where: {
+                    category: {
+                        name: categoryLabel
+                    }
+                }
             }),
-            prisma.product.count({})
+            prisma.product.count({ 
+                where: {
+                    category: {
+                        name: categoryLabel
+                    }
+                }
+            })
         ])
 
         // 41 / 10 = 4.1 -> Math.ceil(41 / 10) = 5 
@@ -47,13 +67,14 @@ export const getPaginatedProductsWithImages = async (options: PaginationOptions)
             currentPage: page,
             products: products.map(product => ({
                 ...product,
+                type: categoryToProductType[product.category.name],
                 sizes: product.size,
                 images: product.ProductImage.map(img => img.url),
             }))
         }
     } 
     catch (error) {
-        console.error("getPaginatedProductsWithImages - ", error)
+        console.error("getPaginatedProductsWithImages() ", error)
         throw new Error('No fue posible cargar los productos.')
     }
 }
