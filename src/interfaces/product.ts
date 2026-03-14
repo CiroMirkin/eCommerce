@@ -9,8 +9,8 @@ export interface Product {
     tags: string[];
     title: string;
     type: ProductTypes;
-    gender: 'men'|'women'|'unisex'
 }
 
 export type Size = 'XS'|'S'|'M'|'L'|'XL'|'XXL'|'XXXL';
-export type ProductTypes = 'shirts'|'pants'|'hoodies'|'hats';
+
+export type ProductTypes = "women" | "men" | "shirts" | "tank-tops" | "hoodies" | "jackets" | "polo-shirts" | "hats";
