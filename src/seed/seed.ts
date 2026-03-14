@@ -1,7 +1,7 @@
 import { Product } from "@/interfaces";
 
 interface SeedData {
-    products: Product[]
+    products: Omit<Product, 'id'>[]
     categories: string[]
 }
 

@@ -10,3 +10,4 @@ export * from './ui/PageNotFound';
 export * from './ui/Title';
 export * from './ui/sidebar/Sidebar';
 export * from './ui/Footer';
+export * from './ui/Pagination';
