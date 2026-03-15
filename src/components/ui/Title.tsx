@@ -1,8 +1,9 @@
 import { titleFont } from "@/config/fonts"
 import { cn } from "@/lib/cn"
+import { ReactNode } from "react"
 
 interface Props {
-    children: string
+    children: string | ReactNode
     className?: string
 }
 
