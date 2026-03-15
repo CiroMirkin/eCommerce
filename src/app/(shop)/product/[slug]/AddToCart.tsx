@@ -34,6 +34,7 @@ export default function AddToCart({ product }: Props) {
         }
 
         addProductToCart(getCartProduct({ product, size, quantity }))
+        gooeyToast.success("Your product was added to the product.")
     } 
 
     return (
