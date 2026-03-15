@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import 'goey-toast/styles.css'
 import { titleFont } from "@/config/fonts";
 
 export const metadata: Metadata = {
@@ -16,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${titleFont.variable} antialiased px-5 sm:px-16 selection:bg-primary selection:text-dark`}
       >
