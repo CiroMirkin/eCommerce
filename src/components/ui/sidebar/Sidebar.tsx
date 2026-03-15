@@ -4,10 +4,17 @@ import { Search } from "lucide-react"
 import Link from "next/link"
 import { useSideMenuStore } from "./stores"
 import { cn } from "@/lib/cn"
-import Image from "next/image"
 import { titleFont } from "@/config/fonts"
+import { ProductTypes } from "@/interfaces"
 
-export function Sidebar(){
+interface Props {
+    categories: { 
+        type: ProductTypes
+        category: string
+    }[]
+}
+
+export function Sidebar({ categories }: Props){
     const { isSideMenuOpen, closeSideMenu } = useSideMenuStore(state => state)
 
     return (
@@ -39,54 +46,20 @@ export function Sidebar(){
                 <div className={cn("text-white py-6", titleFont.className)}>
                     <p className="text-lg mb-4">Categories</p>
                     <ul className="grid grid-cols-2 gap-2 text-base">
-                        <li>
-                            <Link onClick={closeSideMenu} href="/category/men" className="btn-dark flex items-center gap-3.5 text-base">
-                                <Image
-                                    width={35}
-                                    height={35}
-                                    className="rounded object-cover"
-                                    src="/products/1549268-00-A_2.jpg"
-                                    alt="Men"
-                                />
-                                <span className="text-base">Men</span>
-                            </Link>
-                        </li>
-                        <li>
-                            <Link onClick={closeSideMenu} href="/category/accessories" className="btn-dark flex items-center gap-3.5 text-base">
-                                <Image
-                                    width={35}
-                                    height={35}
-                                    className="rounded object-cover"
-                                    src="/products/1657915-00-A_1.jpg"
-                                    alt="Gorras"
-                                />
-                                <span>Accessories</span>
-                            </Link>
-                        </li>
-                        <li>
-                            <Link onClick={closeSideMenu} href="/category/woman" className="btn-dark flex items-center gap-3.5 text-base">
-                                <Image
-                                    width={35}
-                                    height={35}
-                                    className="rounded object-cover"
-                                    src="/products/1740121-00-A_1.jpg"
-                                    alt="Men"
-                                />
-                                <span>Woman</span>
-                            </Link>
-                        </li>
-                         <li>
-                            <Link onClick={closeSideMenu} href="/category/jackets" className="btn-dark flex items-center gap-3.5 text-base">
-                                <Image
-                                    width={35}
-                                    height={35}
-                                    className="rounded object-cover"
-                                    src="/products/1740507-00-A_1.jpg"
-                                    alt="Men"
-                                />
-                                <span>Jackets</span>
-                            </Link>
-                        </li>
+                        { categories.map(category => (
+                            <li key={category.type}>
+                                <Link onClick={closeSideMenu} href={`/category/${category.type}`} className="btn-dark flex items-center gap-3.5 text-base">
+                                    {/* <Image
+                                        width={35}
+                                        height={35}
+                                        className="rounded object-cover"
+                                        src="/products/1657915-00-A_1.jpg"
+                                        alt={category.category}
+                                    /> */}
+                                    <span>{category.category}</span>
+                                </Link>
+                            </li>
+                        ))}
                     </ul>
                 </div>
             </nav>
