@@ -3,7 +3,10 @@ import "./globals.css";
 import { titleFont } from "@/config/fonts";
 
 export const metadata: Metadata = {
-  title: "E-Commerce",
+  title: {
+    template: "%s | E-Commerce",
+    default: "Home | E-Commerce",
+  },
   description: "E-Commerce",
 };
 
