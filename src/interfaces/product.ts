@@ -12,6 +12,29 @@ export interface Product {
     type: ProductTypes;
 }
 
+export interface CartProduct {
+    id: string
+    slug: string
+    title: string
+    price: number
+    quantity: number
+    size: Size
+    image: string
+}
+
+export const getCartProduct = (
+    { product, size, quantity }:
+    { product: Product, size: Size, quantity: number }
+): CartProduct => ({ 
+    size,
+    quantity, 
+    price: product.price,
+    title: product.title,
+    id: product.id,
+    image: product.images[1],
+    slug: product.slug,
+})
+
 export type Size = 'XS'|'S'|'M'|'L'|'XL'|'XXL'|'XXXL';
 
 export type ProductTypes = "women" | "men" | "shirts" | "tank-tops" | "hoodies" | "jackets" | "polo-shirts" | "hats";
