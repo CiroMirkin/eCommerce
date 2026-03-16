@@ -56,7 +56,7 @@ function LoginButton() {
         <button
             type='submit'
             className={cn("btn-primary flex items-center gap-2", pending && "pointer-events-none opacity-50")}
-            arial-disabled={pending}
+            arial-disabled={String(pending)}
             disabled={pending}
         >
             { pending && <Spinner /> } Log In
