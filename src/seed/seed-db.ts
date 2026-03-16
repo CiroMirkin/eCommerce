@@ -2,11 +2,15 @@ import { prisma } from "@/lib/prisma";
 import { initialData } from "./seed";
 
 async function main() {
+    await prisma.user.deleteMany({})
+
     await prisma.productImage.deleteMany({})
     await prisma.product.deleteMany({})
     await prisma.category.deleteMany({})
 
-    const { categories, products } = initialData
+    const { categories, products, users } = initialData
+
+    // Categories
     const categoriesData = categories.map(category => ({
         name: category
     }))
@@ -19,6 +23,7 @@ async function main() {
         return map
     }, {} as Record<string, string>)
 
+    // Products
     products.forEach(async ({ type, sizes, images, ...product }) => {
         const productDB = await prisma.product.create({
             data: {
@@ -37,7 +42,10 @@ async function main() {
         })
     })
 
-    console.log("SEED ejecutado correctamente :)")
+    // Users
+    await prisma.user.createMany({ data: users })
+
+    console.log("\n\nSEED ejecutado correctamente :)")
 }
 
 (() => {
