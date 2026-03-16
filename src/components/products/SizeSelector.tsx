@@ -3,11 +3,13 @@ import type { Size } from "@/interfaces";
 import { cn } from "@/lib/cn";
 
 interface Props {
-    selectedSize: Size
+    selectedSize?: Size
     availableSizes: Size[]
+
+    handleChangeSize: (size: Size) => void
 }
 
-export function SizeSelector({ selectedSize, availableSizes }: Props) {
+export function SizeSelector({ selectedSize, availableSizes, handleChangeSize }: Props) {
     return (
         <div>
             <h3 className={cn("font-bold text-base mb-3", titleFont.className)}>Select size</h3>
@@ -16,6 +18,7 @@ export function SizeSelector({ selectedSize, availableSizes }: Props) {
                 {availableSizes.map(size => (
                     <button
                         key={size}
+                        onClick={() => handleChangeSize(size)}
                         className={cn(
                             "btn-dark text-lg text-left",
                             size === selectedSize && "bg-white text-black" 

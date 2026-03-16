@@ -1,11 +1,12 @@
 export const revalidate = 604800 // Aprox. 7 dias
 
 import { getProductBySlug } from "@/actions"
-import { ExpandableText, ProductSlide, QuantitySelector, SizeSelector, StockLabel } from "@/components"
+import { ExpandableText, ProductSlide } from "@/components"
 import { titleFont } from "@/config/fonts"
 import { cn } from "@/lib/cn"
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
+import AddToCart from "./AddToCart"
 
 interface Props {
     params: Promise<{
@@ -49,18 +50,7 @@ async function ProductBySlugPage({ params }: Props) {
                </div>
 
                 <div className="flex flex-col gap-4">
-                    <SizeSelector
-                        selectedSize={product.sizes[0]}
-                        availableSizes={product.sizes}
-                    />
-                    <div>
-                        <StockLabel slug={slug} />
-                        <QuantitySelector quantity={1} className="mt-2" />
-                    </div>
-                    <button className="btn-primary font-semibold w-60 flex justify-between items-center">
-                        <span className="text-base">Add to Cart</span> 
-                        <span className="text-lg">${ product.price }</span>
-                    </button>
+                    <AddToCart product={product} />
                 </div>
             </div>
         </div>
