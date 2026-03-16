@@ -2,6 +2,7 @@
 
 import { QuantitySelector } from "@/components"
 import { useCartStore } from "@/store"
+import { currencyFormat } from "@/utils"
 import Image from "next/image"
 import Link from "next/link"
 import { useSyncExternalStore } from "react"
@@ -33,7 +34,7 @@ export default function ProductsInCart() {
                             >
                                 { product.title }
                             </Link>
-                            <p className="text-sm font-semibold">${ product.price }</p>
+                            <p className="text-sm font-semibold">{ currencyFormat(product.price) }</p>
                         </div>
                         <p className="text-xs font-semibold">Size: { product.size }</p>
                     </div>

@@ -5,6 +5,7 @@ import { getCartProduct, Product, Size } from "@/interfaces";
 import { useState } from "react";
 import { GooeyToaster, gooeyToast } from 'goey-toast'
 import { useCartStore } from "@/store";
+import { currencyFormat } from "@/utils";
 
 interface Props {
     product: Product
@@ -59,7 +60,7 @@ export default function AddToCart({ product }: Props) {
 
             <button onClick={handleAddToCart} className="btn-primary font-semibold w-60 flex justify-between items-center">
                 <span className="text-base">Add to Cart</span> 
-                <span className="text-lg">${ product.price }</span>
+                <span className="text-lg">{ currencyFormat(product.price) }</span>
             </button>
         </>
     )

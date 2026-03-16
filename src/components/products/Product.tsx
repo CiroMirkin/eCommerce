@@ -1,6 +1,7 @@
 "use client"
 
 import { type Product as ProductInterface } from "@/interfaces"
+import { currencyFormat } from "@/utils"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -28,7 +29,7 @@ export function Product ({ product }: Props) {
                 </div>
                 <div className="flex flex-col gap-px">
                     <p className="font-semibold text-base">{product.title}</p>
-                    <p className="font-normal text-sm">$ {product.price}</p>
+                    <p className="font-normal text-sm">{currencyFormat(product.price)}</p>
                 </div>
             </Link>
         </li>
