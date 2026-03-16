@@ -7,8 +7,10 @@ import { titleFont } from "@/config/fonts";
 import { cn } from "@/lib/cn";
 import { useCartStore } from "@/store";
 import { useSyncExternalStore } from "react";
+import { useRouter } from "next/navigation";
 
 export function TopMenu(){
+    const router = useRouter()
     const openSideMenu = useSideMenuStore(state =>  state.openSideMenu)
     const { getTotalProductsInCart } = useCartStore()
 
@@ -17,7 +19,7 @@ export function TopMenu(){
         () => getTotalProductsInCart(),
         () => 0
     )
-    const showBadge = total > 0
+    const areThereProductsInCart = total > 0
     
     return (
         <nav className="w-full py-10 flex items-center justify-between">
@@ -43,9 +45,16 @@ export function TopMenu(){
                     </Link>
                 </li>
                 <li>
-                    <Link href='/cart' className="group font-semibold hover:text-primary hover:underline transition-colors duration-100 ease-in">
+                    <Link
+                        href={ '/cart' }
+                        onClick={(e) => {
+                            e.preventDefault()
+                            router.push(areThereProductsInCart ? '/cart' : '/cart/empty')
+                        }}
+                        className="group font-semibold hover:text-primary hover:underline transition-colors duration-100 ease-in"
+                    >
                         <div className="relative block sm:hidden">
-                            { showBadge && (
+                            { areThereProductsInCart && (
                                 <span className={cn(
                                     "absolute py-px px-[2.5px] text-xs rounded-full font-bold -top-1 -right-2.5 bg-black text-white group-hover:bg-primary group-hover:text-black transition-colors",
                                     total < 10 ? "px-1.5" : "px-[2.5px]",
@@ -54,7 +63,7 @@ export function TopMenu(){
                             <ShoppingCart />
                         </div>
                         <div className="relative hidden sm:block">
-                            { showBadge && (
+                            { areThereProductsInCart && (
                                 <span className={cn(
                                     "absolute py-px px-[2.5px] text-xs rounded-full font-bold -top-2 -right-3.5 bg-white group-hover:bg-primary text-black transition-colors",
                                     total < 10 ? "px-1.5" : "px-[2.5px]",
