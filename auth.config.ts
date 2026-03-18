@@ -1,7 +1,7 @@
 import { prisma } from '@/lib/prisma';
 import { SeedUser } from '@/seed/seed';
 import bcrypt from 'bcryptjs';
-import NextAuth, { type NextAuthConfig } from 'next-auth';
+import NextAuth, { type Session, type NextAuthConfig } from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 import { z } from 'zod';
  
@@ -9,6 +9,18 @@ export const authConfig: NextAuthConfig = {
   pages: {
     signIn: '/auth/login',
     newUser: '/auth/register',
+  },
+  callbacks: {
+    jwt({ token, user }) {
+        if(user) {
+            token.data = user
+        }  
+        return token
+    },
+    session({ session, token, user }){
+        session.user = token.data as Session['user']
+        return session
+    },
   },
   providers: [
     Credentials({
@@ -38,4 +50,4 @@ export const authConfig: NextAuthConfig = {
   ],
 }
 
-export const { signIn, signOut, auth } = NextAuth(authConfig)
+export const { signIn, signOut, auth, handlers } = NextAuth(authConfig)
