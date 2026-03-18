@@ -3,16 +3,21 @@
 import Link from 'next/link';
 import { authenticate } from '@/actions';
 import { useFormStatus } from 'react-dom';
-import { gooeyToast, GooeyToaster } from 'goey-toast';
+import { GooeyToaster, gooeyToast } from 'goey-toast'
 import { cn } from '@/lib/cn';
 import { Spinner } from '@/components';
-import { useActionState } from 'react';
+import { useActionState, useEffect } from 'react';
 
 export default function LoginForm() {
     const [ state, dispatch ] = useActionState(authenticate, undefined)
 
-    if(state === "Invalid credentials.") gooeyToast.error('Invalid credentials')
-    if(state === "Something went wrong.") gooeyToast.error('Sorry, something went wrong.')
+    useEffect(() => {
+        if(state === "Invalid credentials.") gooeyToast.error('Invalid credentials')
+        if(state === "Something went wrong.") gooeyToast.error('Sorry, something went wrong.')
+        if(state === "Success Sign in.") {
+            window.location.replace('/products')
+        }
+    }, [state])
 
     return (
         <>
