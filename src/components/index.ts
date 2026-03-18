@@ -13,3 +13,5 @@ export * from './ui/sidebar/Sidebar';
 export * from './ui/Footer';
 export * from './ui/Pagination';
 export * from './ui/Spinner';
+
+export * from './providers/Provider';
