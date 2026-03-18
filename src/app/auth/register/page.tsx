@@ -1,5 +1,6 @@
 import { titleFont } from '@/config/fonts';
 import Link from 'next/link';
+import RegisterForm from './RegisterForm';
 
 export default async function RegisterPage() {
     return (
@@ -8,25 +9,7 @@ export default async function RegisterPage() {
 
             <div className="flex flex-col">
 
-                <label htmlFor="text" className='mb-2'>Full Name</label>
-                <input
-                    className="px-5 py-2 border bg-white text-black caret-black rounded mb-5"
-                    type="text" />
-
-                <label htmlFor="email" className='mb-2'>Email</label>
-                <input
-                    className="px-5 py-2 border bg-white text-black caret-black rounded mb-5"
-                    type="email" />
-
-                <label htmlFor="password" className='mb-2'>Password</label>
-                <input
-                    className="px-5 py-2 border bg-white text-black caret-black rounded mb-5"
-                    type="password" />
-
-                <button
-                    className="btn-primary">
-                    Sign In
-                </button>
+                <RegisterForm/>
 
                 {/* divider line */}
                 <div className="flex items-center my-5">

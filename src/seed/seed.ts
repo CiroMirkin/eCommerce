@@ -1,8 +1,17 @@
 import { Product } from "@/interfaces";
+import bcrypt from "bcryptjs";
+
+export interface SeedUser {
+    name: string
+    email: string
+    password: string
+    role: 'admin' | 'client'
+}
 
 interface SeedData {
     products: Omit<Product, 'id'>[]
     categories: string[]
+    users: SeedUser[]
 }
 
 export const initialData: SeedData = {
@@ -593,5 +602,19 @@ export const initialData: SeedData = {
             tags: ['shirt'],
             title: "Women's Raven Joggers",
         },
-    ]
+    ],
+    users: [
+        {
+            name: 'Admin Tester',
+            email: 'tester@gmail.com',
+            password: bcrypt.hashSync('testing'),
+            role: 'admin',
+        },
+        {
+            name: 'Client',
+            email: 'client@gmail.com',
+            password: bcrypt.hashSync('client'), 
+            role: 'client',
+        },
+    ],
 }
