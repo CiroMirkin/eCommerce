@@ -9,15 +9,18 @@ import { useCartStore } from "@/store";
 import { useSyncExternalStore } from "react";
 import { useRouter } from "next/navigation";
 import { CartIndicator } from "../CartIndicator";
+import { useSession } from "next-auth/react";
+import { UserMenuItem } from "./UserMenuItem";
+import { Spinner } from "../Spinner";
 
-interface Props {
-    children: React.ReactNode
-}
-
-export function TopMenu({ children }: Props){
+export function TopMenu(){
     const router = useRouter()
     const openSideMenu = useSideMenuStore(state => state.openSideMenu)
     const { getTotalProductsInCart } = useCartStore()
+
+    const { status } = useSession()
+    const isLoggedIn = status === 'authenticated'
+    const isLoading = status === 'loading'
 
     const total = useSyncExternalStore(
         useCartStore.subscribe,
@@ -58,8 +61,8 @@ export function TopMenu({ children }: Props){
                         <CartIndicator total={total} areThereProductsInCart={areThereProductsInCart} />
                     </Link>
                 </li>
-                <li>
-                    {children}
+                <li className="grid place-items-center">
+                    {isLoading ? <Spinner/> : <UserMenuItem isLoggedIn={isLoggedIn} />}
                 </li>
             </ul>
         </nav>
