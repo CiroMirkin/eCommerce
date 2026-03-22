@@ -45,8 +45,8 @@ export default function AddressForm({ countries, userStoredAddress = {} }: Props
     }, [address, reset])
     
     const onSubmit = async (data: AddressFormInput) => {
-        setAddress(data)
         const { rememberAddress, ...userAddress} = data
+        setAddress(userAddress)
         if(rememberAddress) {
             const setResponse = await setUserAddress(userAddress, session!.user.id)
             if(!setResponse.ok) gooeyToast.error(setResponse.message)
