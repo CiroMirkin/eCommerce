@@ -14,4 +14,8 @@ export * from './ui/Footer';
 export * from './ui/Pagination';
 export * from './ui/Spinner';
 
-export * from './providers/Provider';
+export * from './providers/Providers';
+
+export * from './ui/order/OrderStatus';
+
+export * from './ui/paypal/PaypalButton';
