@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import 'goey-toast/styles.css'
 import { titleFont } from "@/config/fonts";
-import { Provider } from "@/components";
+import { Providers } from "@/components";
 
 export const metadata: Metadata = {
   title: {
@@ -22,9 +22,9 @@ export default function RootLayout({
       <body
         className={`${titleFont.variable} antialiased px-5 sm:px-16 selection:bg-primary selection:text-dark`}
       >
-        <Provider>
+        <Providers>
           {children}
-        </Provider>
+        </Providers>
       </body>
     </html>
   );

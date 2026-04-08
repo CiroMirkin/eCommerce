@@ -1,7 +1,5 @@
 import { getCurrentUserOrders } from '@/actions';
-import { Title } from '@/components';
-import { cn } from '@/lib/cn';
-import { CreditCard } from 'lucide-react';
+import { OrderStatus, Title } from '@/components';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
@@ -38,15 +36,8 @@ export default  async function  OrdersPage() {
                                 <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                     { order.OrderAddress!.firstName }
                                 </td>
-                                <td className="flex items-center text-sm  text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                    <CreditCard className={cn(order.isPaid ? "text-green-800" : "text-red-800")} />
-                                    <span className={cn(
-                                        "mx-2", 
-                                        order.isPaid ? "text-green-800" : "text-red-800"
-                                    )}
-                                    >
-                                        { order.isPaid ? "Payment": "No payment" }
-                                    </span>
+                                <td>
+                                    <OrderStatus isPaid={order.isPaid} bg={false} />
                                 </td>
                                 <td className="text-sm text-dark px-6 ">
                                     <Link href={`/orders/${order.id}`} className="hover:underline">

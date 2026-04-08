@@ -22,3 +22,7 @@ export * from '@/actions/order/place-order'
 export * from '@/actions/order/get-order-by-id'
 export * from '@/actions/order/ger-current-user-orders'
 
+// Payments
+export * from '@/actions/payments/set-transaction-id'
+export * from '@/actions/payments/paypal-check-payment'
+

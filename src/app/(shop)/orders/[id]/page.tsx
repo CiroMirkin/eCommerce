@@ -1,10 +1,9 @@
 
 import { getOrderById } from "@/actions";
-import { Title } from "@/components";
+import { OrderStatus, PaypalButton, Title } from "@/components";
 import { titleFont } from "@/config/fonts";
 import { cn } from "@/lib/cn";
 import { currencyFormat } from "@/utils";
-import { CreditCard } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -30,12 +29,7 @@ export default async function OrderByIdPage({ params }: Props) {
         <div className="w-full">
             <Title>{`Check order #${id.split('-').at(0)}`}</Title>
             <div className="flex justify-center lg:justify-between flex-wrap gap-8">
-                <div className={cn(
-                    "w-full flex items-center gap-2 p-2 font-semibold text-black rounded",
-                    order!.isPaid ? "bg-green-300" : "bg-red-300"
-                )}>
-                    <CreditCard /> <span>Outstanding Payment</span>
-                </div>
+                <OrderStatus isPaid={order!.isPaid} />
                 <div className="w-full min-w-80 sm:max-w-120 flex flex-col gap-4">
                     {products.map(product => (
                         <div key={product.product.slug} className="w-full flex bg-dark p-2 pr-4 rounded">
@@ -95,6 +89,12 @@ export default async function OrderByIdPage({ params }: Props) {
                         <h2 className={cn("text-xl flex justify-between mt-2", titleFont.className)}>
                             <span>Total:</span> <span className="font-bold">{ currencyFormat(order!.total) }</span>
                         </h2>
+                    </div>
+                    <div className="w-full mt-2">
+                        { order!.isPaid
+                            ? <OrderStatus isPaid={order!.isPaid} />
+                            : <PaypalButton amount={order!.total} orderId={order!.id} />
+                        }
                     </div>
                 </footer>
             </div>
