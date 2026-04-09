@@ -21,8 +21,12 @@ export * from '@/actions/address/delete-user-address'
 export * from '@/actions/order/place-order'
 export * from '@/actions/order/get-order-by-id'
 export * from '@/actions/order/ger-current-user-orders'
+export * from '@/actions/order/get-paginated-orders'
 
 // Payments
 export * from '@/actions/payments/set-transaction-id'
 export * from '@/actions/payments/paypal-check-payment'
 
+// Users
+export * from '@/actions/user/get-users'
+export * from '@/actions/user/change-user-role'
