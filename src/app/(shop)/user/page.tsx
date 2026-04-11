@@ -19,6 +19,7 @@ export default async function UserPage() {
                 {
                     session.user.role === 'admin' 
                     ? <div className="flex gap-4 flex-wrap">
+                        <Link href="/admin/products" className="hover:text-primary hover:underline">See Products</Link>
                         <Link href="/admin/orders" className="hover:text-primary hover:underline">See orders</Link>
                         <Link href="/admin/users" className="hover:text-primary hover:underline">See users</Link>
                     </div>
