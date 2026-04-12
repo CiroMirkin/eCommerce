@@ -1,3 +1,5 @@
+"use server"
+
 import { categoryToProductType, ProductTypes } from "@/interfaces"
 import { prisma } from "@/lib/prisma"
 
